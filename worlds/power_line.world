@@ -1,0 +1,105 @@
+<sdf version='1.9'>
+  <world name='default'>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>47.397742999999998</latitude_deg>
+      <longitude_deg>8.5455939999999995</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <physics name='default_physics' default='false' type='ode'>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <sor>1</sor>
+          <use_dynamic_moi_rescaling>false</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.20000000000000001</erp>
+          <contact_max_correcting_vel>1000</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+      <max_step_size>0.0040000000000000001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+
+    <scene>
+      <shadows>false</shadows>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <grid>false</grid>
+    </scene>
+
+    <state world_name='default'>
+      <model name='three_power_towers'>
+        <pose>0.1 0.1 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.1 0.1 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <iterations>0</iterations>
+    </state>
+
+    <gui>
+      <camera name='camera'>
+        <pose>-60 -100 30 0 0.4 0.89</pose>
+      </camera>
+    </gui>
+
+    <gravity>0 0 -9.8066</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+
+
+    <model name='ground_plane'>
+      <self_collide>true</self_collide>
+        <include merge="true">
+          <uri>file:///home/leticia/ros2_ws/src/inspection_drone_simulation/models/grass_plane/model.sdf</uri>
+        </include>      
+    </model>
+
+    <model name='three_power_towers'>
+      <self_collide>true</self_collide>
+        <include merge="true">
+          <uri>file:///home/leticia/ros2_ws/src/inspection_drone_simulation/models/three_power_towers/model.sdf</uri>
+        </include>
+    </model>
+
+    <light name='sun' type='directional'>
+      <pose>250 250 600 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+
+    <!-- drone model -->
+    <model name='x500_base'>
+        <self_collide>true</self_collide>
+        <include merge="true">
+            <uri>file:///home/leticia/ros2_ws/src/inspection_drone_simulation/models/drone/model.sdf</uri>
+        </include>
+    </model>
+
+  </world>
+</sdf>
